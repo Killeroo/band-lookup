@@ -1,11 +1,24 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+const parseString = require('react-native-xml2js').parseString; // Xml parser
 
 class SearchBar extends Component {
   handleSearchClick = () => {
     const name = this._name.value;
     console.log(name);
+
+    // Make call to MusicBrainz search api
+    fetch('http://musicbrainz.org/ws/2/artist/?query=artist:fred%20AND%20type:group%20AND%20country:US')
+      .then(response => response.text()) // Convert response to text
+      .then((response) => {
+        parseString(response, function (err, result) { // Convert text to xml string
+          console.log(response);
+          
+        });
+      }).catch((err) => {
+        console.log('fetch', err); 
+      })
   }
 
   render() {
