@@ -2,19 +2,27 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-function SearchBar() {
-  return (
-    <div className="col-lg-6">
-      <div className="input-group">
-        <input type="text" className="form-control" placeholder="Search for..." />
-        <span className="input-group-btn">
-          <button className="btn btn-secondary" type="button">Search</button>
-        </span>
+class SearchBar extends Component {
+  handleSearchClick = () => {
+    const name = this._name.value;
+    console.log(name);
+  }
+
+  render() {
+    return (
+      <div className="col-lg-6">
+        <div className="input-group">
+          <input type="text" className="form-control" placeholder="Search for..." ref={input => this._name = input} />
+          <span className="input-group-btn">
+            <button className="btn btn-secondary" type="button" onClick={this.handleSearchClick}>Search</button>
+          </span>
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
+// Top level react component
 class App extends Component {
   render() {
     return (
